@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheHighWRLD — Ultimate 999 Portal</title>
+  
+  <meta name="description" content="The absolute premium community portal for Juice WRLD fans. Share music, explore unreleased vaults, view community edits, and keep the 999 legacy alive.">
+  <meta property="og:title" content="TheHighWRLD — 999 Forever">
+  <meta property="og:description" content="Join the ultimate community hub for Juice WRLD fans. Real talk, unreleased vault, and events.">
+  <meta property="og:image" content="Juice%20WRLD.jpg">
+  <meta property="og:url" content="https://thehighwrld.com">
+  <meta name="theme-color" content="#c026d3">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --purple: #c026d3;
+      --cyan: #22d3ee;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+      background: radial-gradient(circle at center, #25004d, #050010, #000000);
+      color: white;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    .neon-purple {
+      text-shadow: 0 0 20px #c026d3, 0 0 40px #c026d3, 0 0 60px #7e22ce;
+    }
+    .neon-cyan {
+      text-shadow: 0 0 20px #22d3ee, 0 0 40px #22d3ee;
+    }
+
+    /* PREMIUM NAVBAR NAVIGATION */
+    nav {
+      background: #090514;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-bg {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(15, 0, 30, 0.95)), 
+                        url('Juice%20WRLD.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+    
+    /* PREMIUM CARD CONTAINER SYSTEM */
+    .card {
+      background-color: #120721; 
+      border-radius: 28px;
+      padding: 32px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  box-shadow 0.4s ease, 
+                  border-color 0.4s ease,
+                  background-color 0.4s ease;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      will-change: transform, box-shadow;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+      background-color: #1a0b30;
+    }
+
+    .card h3 {
+      text-shadow: 0 0 12px currentColor;
+    }
+
+    /* Glowing list layout indicators */
+    .card ul { list-style: none; padding-left: 0; }
+    .card-music li::before { content: "⚡ "; color: #d946ef; }
+    .card-community li::before { content: "🌌 "; color: #22d3ee; }
+    .card-features li::before { content: "✨ "; color: #a855f7; }
+
+    /* Card borders with responsive drop shadows */
+    .card-music { 
+      border: 1px solid rgba(217, 70, 239, 0.35); 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(217, 70, 239, 0.1); 
+    }
+    .card-music:hover { 
+      border-color: rgba(217, 70, 239, 0.9); 
+      box-shadow: 0 20px 50px rgba(217, 70, 239, 0.45); 
+    }
+
+    .card-community { 
+      border: 1px solid rgba(34, 211, 238, 0.35); 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(34, 211, 238, 0.1); 
+    }
+    .card-community:hover { 
+      border-color: rgba(34, 211, 238, 0.9); 
+      box-shadow: 0 20px 50px rgba(34, 211, 238, 0.45); 
+    }
+
+    .card-features { 
+      border: 1px solid rgba(168, 85, 247, 0.35); 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(168, 85, 247, 0.1); 
+    }
+    .card-features:hover { 
+      border-color: rgba(168, 85, 247, 0.9); 
+      box-shadow: 0 20px 50px rgba(168, 85, 247, 0.45); 
+    }
+
+    .card-comps { 
+      border: 1px solid rgba(244, 114, 182, 0.35); 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(244, 114, 182, 0.1); 
+    }
+    .card-comps:hover { 
+      border-color: rgba(244, 114, 182, 0.9); 
+      box-shadow: 0 20px 50px rgba(244, 114, 182, 0.55); 
+    }
+
+    /* NEON INTERACTIVE FILTER BUTTONS */
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s;
+      background: #110c1a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .tab-btn:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+    }
+    .tab-btn.active {
+      background: #db2777;
+      border-color: #f472b6;
+      color: white;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.5);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(244, 114, 182, 0.4); border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #f472b6; }
+
+    /* GRADIENT CTA BUTTONS */
+    .btn {
+      background: linear-gradient(to right, #c026d3, #db2777);
+      color: white;
+      font-weight: 800;
+      padding: 18px 45px;
+      border-radius: 9999px;
+      font-size: 1.25rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      max-width: 100%;
+      box-shadow: 0 0 25px rgba(192, 38, 211, 0.6), 0 0 50px rgba(219, 39, 119, 0.3);
+    }
+    .btn:hover {
+      transform: scale(1.04) translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 35px #c026d3, 0 0 70px #db2777;
+    }
+
+    /* SCROLL TO TOP BUTTON */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background: #110822;
+      border: 2px solid #c026d3;
+      color: white;
+      cursor: pointer;
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 5px 15px rgba(192, 38, 211, 0.3);
+    }
+    #scrollTopBtn:hover { 
+      transform: translateY(-4px); 
+      background: #c026d3;
+      box-shadow: 0 8px 25px rgba(192, 38, 211, 0.6); 
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.8rem; }
+      section { padding: 60px 20px; }
+      .card { padding: 24px; }
+      #scrollTopBtn { right: 20px; bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="scrollTopBtn" class="flex items-center gap-2">
+    <span>Scroll to Top</span> <i class="fas fa-arrow-up text-xs"></i>
+  </button>
+
+  <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">THEHIGHWRLD</span>
+    </div>
+    
+    <div id="nav-links" class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+      <a href="#features-section" class="hover:text-purple-400 transition-colors">Core Features</a>
+      <a href="#audio-preview" class="hover:text-cyan-400 transition-colors">Audio Relays</a>
+      <a href="#community-updates" class="hover:text-fuchsia-400 transition-colors">Server Hub</a>
+      <a href="#live-feed" class="hover:text-cyan-400 transition-colors">Server Live-Feed</a>
+      <a href="#join" class="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 transition-all">Portal Entrance</a>
+    </div>
+
+    <button id="mobile-menu-toggle" class="md:hidden text-gray-300 hover:text-white text-xl focus:outline-none" aria-label="Toggle Navigation Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="mobile-drawer" class="hidden absolute top-full left-0 w-full bg-[#090514]/95 border-b border-white/10 flex flex-col items-center gap-5 py-6 font-semibold text-gray-300 backdrop-blur-md md:hidden">
+      <a href="#features-section" class="mobile-nav-link hover:text-purple-400 transition-colors">Core Features</a>
+      <a href="#audio-preview" class="mobile-nav-link hover:text-cyan-400 transition-colors">Audio Relays</a>
+      <a href="#community-updates" class="mobile-nav-link hover:text-fuchsia-400 transition-colors">Server Hub</a>
+      <a href="#live-feed" class="mobile-nav-link hover:text-cyan-400 transition-colors">Server Live-Feed</a>
+      <a href="#join" class="mobile-nav-link px-6 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 transition-all">Portal Entrance</a>
+    </div>
+  </nav>
+
+  <section class="hero-bg">
+    <div class="relative z-10 px-6 max-w-4xl w-full pt-16">
+      <h1 class="hero-title neon-purple mb-4">THEHIGHWRLD</h1>
+      <p class="text-xl sm:text-2xl md:text-3xl text-purple-300 neon-cyan mb-12 font-bold tracking-widest">999 FOREVER • LEGACY NEVER DIES</p>
+      
+      <button onclick="document.getElementById('features-section').scrollIntoView({ behavior: 'smooth' })" 
+              class="btn text-xl sm:text-2xl py-5 px-12">
+        Explore The Hub
+      </button>
+    </div>
+
+    <a href="javascript:void(0)" onclick="document.getElementById('features-section').scrollIntoView({ behavior: 'smooth' })" 
+       class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block transition-all hover:scale-110">
+      <i class="fas fa-chevron-down text-4xl text-purple-400 hover:text-purple-300"></i>
+    </a>
+  </section>
+
+  <section id="features-section" class="pt-28">
+    <div class="max-w-5xl mx-auto text-center mb-20 px-4">
+      <h2 class="text-4xl sm:text-5xl font-extrabold neon-purple mb-6">Welcome to TheHighWRLD</h2>
+      <p class="text-base sm:text-lg md:text-xl text-purple-200/90 max-w-3xl mx-auto font-medium leading-relaxed">
+        A Juice WRLD 999 community built for fans who want to connect, share, and celebrate the legacy together. This is a space where members can explore music-inspired content, discuss Juice WRLD’s impact, share creative artwork concepts, and stay updated through announcements and community posts. With voice channels, chats, and interactive spaces for different topics, the server is designed to keep conversations active and meaningful while giving everyone a place to express themselves. Whether you’re here to talk about music, meet other fans, or just be part of the 999 atmosphere, this community is built to bring people together. Join us and help keep the Juice WRLD legacy alive.
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-stretch w-full px-4">
+      
+      <div class="card card-music">
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3 text-fuchsia-400">🎵 Music</h3>
+        <ul class="space-y-4 text-fuchsia-100/80 flex-grow text-[15px]">
+          <li>Juice WRLD &amp; rap requests</li>
+          <li>Unreleased &amp; fan-made tracks</li>
+          <li>High quality voice chats</li>
+          <li>Juice WRLD Sessions</li>
+        </ul>
+      </div>
+
+      <div class="card card-community">
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3 text-cyan-400">🌌 Community</h3>
+        <ul class="space-y-4 text-cyan-100/80 flex-grow text-[15px]">
+          <li>Daily vibes &amp; discussions</li>
+          <li>Fan art &amp; edits</li>
+          <li>Memes &amp; real talk</li>
+          <li>Support &amp; WRLD Support</li>
+        </ul>
+      </div>
+
+      <div class="card card-features">
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3 text-purple-400">⚡ Features</h3>
+        <ul class="space-y-4 text-purple-100/80 flex-grow text-[15px]">
+          <li>Music bots</li>
+          <li>Leveling system</li>
+          <li>Events &amp; giveaways</li>
+          <li>Active VC channels</li>
+          <li>Juice WRLD Comps</li>
+        </ul>
+      </div>
+
+      <div class="card card-comps">
+        <h3 class="text-2xl font-bold mb-3 flex items-center gap-3 text-pink-400">🏆 Comp Index</h3>
+        
+        <div class="flex gap-1.5 mb-4 border-b border-white/10 pb-2">
+          <button onclick="switchTab('all')" id="tab-all" class="tab-btn active">All</button>
+          <button onclick="switchTab('sessions')" id="tab-sessions" class="tab-btn">Sessions</button>
+          <button onclick="switchTab('vault')" id="tab-vault" class="tab-btn">Vault</button>
+        </div>
+
+        <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1">
+          <ul id="comp-list" class="space-y-3 text-pink-100/80 text-[14px]">
+            <li class="comp-item-session">• Juice WRLD API</li>
+            <li class="comp-item-session">• Mega Juice WRLD Sessions Comp</li>
+            <li class="comp-item-session">• Untitled Juice WRLD Sessions Comp</li>
+            <li class="comp-item-vault">• Fireflies MP3 Comp</li>
+            <li class="comp-item-vault">• NLMB Slowed + Reverb Comp 1</li>
+            <li class="comp-item-session">• NLMB Session Comp 1</li>
+            <li class="comp-item-vault">• NLMB Instrumental Comp 1</li>
+            <li class="comp-item-vault">• NLMB Instrumental Comp 2</li>
+            <li class="comp-item-vault">• NLMB Instrumental Comp 3</li>
+            <li class="comp-item-vault">• NLMB Instrumental Comp 4 (WIP)</li>
+            <li class="comp-item-vault">• NLMB Stem Comp 1</li>
+            <li class="comp-item-vault">• Clutch’s ULTIMATE Juice WRLD Comp ver.</li>
+            <li class="comp-item-vault">• J.R.A.K.O's OG File Vault</li>
+            <li class="comp-item-vault">• nlmb⁹₉⁹ | Linktree</li>
+            <li class="comp-item-vault">• Juice Archive's Juice WRLD Compilation</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="audio-preview" class="border-t border-purple-950/20 max-w-7xl mx-auto w-full px-4 pt-24 pb-8">
+    <div class="max-w-3xl mx-auto text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold neon-cyan mb-4">Community Audio Relays</h2>
+      <p class="text-gray-400 text-sm">Tune in to public instrumentals and community-shared session structures.</p>
+    </div>
+
+    <div class="max-w-2xl mx-auto rounded-3xl bg-[#120721]/60 border border-purple-500/30 backdrop-blur-xl p-6 sm:p-8 shadow-2xl flex flex-col md:flex-row gap-8 items-center shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)]">
+      
+      <div class="relative w-40 h-40 shrink-0 rounded-2xl overflow-hidden group border border-white/10 shadow-lg bg-[#05020a]">
+        <img id="player-cover" src="" alt="Cover Art" class="absolute inset-0 w-full h-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-cyan-900/20 mix-blend-multiply"></div>
+      </div>
+
+      <div class="flex-grow w-full flex flex-col justify-between h-full">
+        <audio id="main-audio" src=""></audio>
+
+        <div class="mb-4 text-center md:text-left">
+          <h3 id="player-track-title" class="text-xl font-bold tracking-tight text-white mb-1">Select a Track</h3>
+          <p id="player-track-tag" class="text-xs font-semibold text-cyan-400 uppercase tracking-widest font-mono">Ready to Stream</p>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex justify-between text-[11px] text-gray-500 font-mono mb-1">
+            <span id="audio-current-time">0:00</span>
+            <span id="audio-duration">0:00</span>
+          </div>
+          <div id="progress-container" class="w-full bg-white/5 h-2 rounded-full cursor-pointer overflow-hidden border border-white/5 relative">
+            <div id="progress-bar" class="bg-gradient-to-r from-purple-500 to-cyan-400 h-full w-0 transition-all duration-100"></div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center md:justify-start gap-6 mb-6">
+          <button id="btn-prev" class="text-gray-400 hover:text-white transition-colors text-lg focus:outline-none" aria-label="Previous Track">
+            <i class="fas fa-backward-step"></i>
+          </button>
+          <button id="btn-play-pause" class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white flex items-center justify-center text-xl shadow-lg border border-white/20 transition-all hover:scale-105 active:scale-95 focus:outline-none" aria-label="Play/Pause">
+            <i id="play-icon" class="fas fa-play ml-0.5"></i>
+          </button>
+          <button id="btn-next" class="text-gray-400 hover:text-white transition-colors text-lg focus:outline-none" aria-label="Next Track">
+            <i class="fas fa-forward-step"></i>
+          </button>
+        </div>
+
+        <div class="border-t border-white/5 pt-4">
+          <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 font-mono">Community Audio Playlist</p>
+          <div class="space-y-1 max-h-[110px] overflow-y-auto custom-scrollbar pr-1" id="playlist-container"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="community-updates" class="border-t border-purple-950/20 bg-black/10 py-20 px-4">
+    <div class="max-w-7xl mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2 items-stretch">
+      
+      <div class="card card-music p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 text-fuchsia-400 flex items-center gap-3">
+            <i class="fas fa-bullhorn"></i> Server Announcements Terminal
+          </h3>
+          <p class="text-gray-400 text-sm mb-6">Stay informed on critical community bulletins, live system upgrades, special alerts, and network listening logs.</p>
+          
+          <div class="space-y-4">
+            <div class="p-4 bg-purple-950/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold tracking-widest text-fuchsia-300 uppercase">#announcements</span>
+                <span class="text-[10px] text-gray-500 font-mono">BROADCAST ACTIVE</span>
+              </div>
+              <p class="text-xs text-gray-300 leading-relaxed">Weekly collective listening circles are open inside the public high-fidelity audio relays. Connect, chat, and honor the music together tonight.</p>
+            </div>
+
+            <div class="p-4 bg-purple-950/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold tracking-widest text-purple-400 uppercase">#community-posts</span>
+                <span class="text-[10px] text-gray-500 font-mono">UPDATED SECONDS AGO</span>
+              </div>
+              <p class="text-xs text-gray-300 leading-relaxed">New automated music bot commands and tailored server tier badges have been implemented. Track your active XP directly via channels.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+          <span class="text-gray-500 font-medium font-mono">Status: Broadcast Link Active</span>
+          <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        </div>
+      </div>
+
+      <div class="card card-community p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400 flex items-center gap-3">
+            <i class="fas fa-palette"></i> Creative Concept Portal
+          </h3>
+          <p class="text-gray-400 text-sm mb-6">A dedicated interactive feed focusing on artwork expansions, custom streetwear edits, and music-inspired designs.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-cyan-950/10 border border-cyan-500/20 rounded-xl hover:border-cyan-500/50 transition-all group cursor-pointer">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                  <i class="fas fa-image"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-gray-200 group-hover:text-cyan-300 transition-colors">999 Vibe Artwork</h4>
+                  <p class="text-[10px] text-gray-500">By Server Designers</p>
+                </div>
+              </div>
+              <p class="text-[11px] text-gray-400 leading-normal">Explore color-graded graphic sets, original mockups, and track wallpapers designed by core community artists.</p>
+            </div>
+
+            <div class="p-4 bg-cyan-950/10 border border-cyan-500/20 rounded-xl hover:border-cyan-500/50 transition-all group cursor-pointer">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-gray-200 group-hover:text-cyan-300 transition-colors">Impact Discussions</h4>
+                  <p class="text-[10px] text-gray-500">By Community Mods</p>
+                </div>
+              </div>
+              <p class="text-[11px] text-gray-400 leading-normal">Deep-dive spaces highlighting individual track analysis, lyrical impacts, and collaborative fan projects.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-cyan-400/70 mt-6 font-semibold cursor-pointer hover:text-cyan-400 transition-colors" onclick="document.getElementById('join').scrollIntoView({ behavior: 'smooth' })">
+          Drop artwork modifications inside #fan-art <i class="fas fa-chevron-right text-[10px] ml-1"></i>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="live-feed" class="border-t border-purple-950/20 max-w-7xl mx-auto w-full px-4 pt-12">
+    <div class="max-w-3xl mx-auto text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold neon-cyan mb-4">Inside the WRLD</h2>
+      <p class="text-gray-400 text-sm">Catch a direct simulated preview of active discussions across our communication relays right now.</p>
+    </div>
+    
+    <div class="max-w-2xl mx-auto rounded-2xl bg-zinc-950 border border-cyan-500/30 shadow-2xl p-6 font-mono text-sm text-gray-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4 text-xs text-cyan-400/70 font-bold">
+        <span><i class="fab fa-discord mr-2 text-base"></i> FEED CHANNELS // #general-chat</span>
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+      </div>
+      
+      <div class="space-y-4 max-h-[200px] overflow-y-hidden text-left">
+        <div class="flex items-start gap-3 border-l-2 border-purple-500/40 pl-3">
+          <span class="text-purple-400 font-bold text-xs shrink-0">@999_Legacy:</span>
+          <p class="text-gray-300 text-xs">Yo, has anyone found the complete master stems file for the fireflies session? That instrumental track is insane.</p>
+        </div>
+        <div class="flex items-start gap-3 border-l-2 border-pink-500/40 pl-3">
+          <span class="text-pink-400 font-bold text-xs shrink-0">@JuiceVault:</span>
+          <p class="text-gray-300 text-xs">Yeah bro check out the updated index box on the homepage, Clutch just pushed the ultimate folder links 🐐</p>
+        </div>
+        <div class="flex items-start gap-3 border-l-2 border-cyan-500/40 pl-3">
+          <span class="text-cyan-400 font-bold text-xs shrink-0">@NLMB_Vibes:</span>
+          <p class="text-gray-300 text-xs">Just uploaded my concept poster track art layout to the server! Let me know what you guys think</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="py-24 px-4">
+    <div class="max-w-3xl mx-auto text-center bg-gradient-to-br from-[#160a24] via-[#05020a] to-[#240a18] border border-purple-500/40 rounded-3xl p-10 sm:p-16 w-full shadow-2xl relative overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.2)]">
+      
+      <div class="absolute -top-16 -left-16 w-36 h-36 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-pink-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 neon-purple">Join The Network</h2>
+      <p class="text-lg sm:text-xl text-purple-200 mb-4 font-semibold tracking-wide">Secure your credentials and enter the collective ecosystem</p>
+      
+      <div class="inline-flex items-center gap-2 bg-[#230d3a] px-4 py-1.5 rounded-full border border-purple-500/40 text-[11px] font-bold tracking-widest text-purple-300 mb-10 uppercase shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Relay Online // Live Link
+      </div>
+      
+      <br>
+      <a href="https://discord.gg/fUkgZ9w9tx" target="_blank" rel="noopener noreferrer"
+         class="btn text-lg sm:text-2xl py-5 px-10 mx-auto flex-wrap max-w-full">
+        <i class="fab fa-discord text-2xl sm:text-3xl"></i>
+        <span>Join TheHighWRLD Discord</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="text-center py-12 border-t border-purple-900/20 px-6 bg-black/40">
+    <p class="text-3xl mb-3 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 font-black">999 FOREVER</p>
+    <p class="text-purple-400 font-semibold text-sm">LLJW • Long Live Juice WRLD</p>
+    <p class="text-[11px] text-gray-600 mt-6 font-medium">Made with premium execution for the community</p>
+  </footer>
+
+  <script>
+    // Scroll Arrow Management
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        scrollTopBtn.style.display = "flex";
+      } else {
+        scrollTopBtn.style.display = "none";
+      }
+    };
+
+    // Sorting Repository System
+    function switchTab(category) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${category}`).classList.add('active');
+      
+      const items = document.querySelectorAll('#comp-list li');
+      
+      items.forEach(item => {
+        if (category === 'all') {
+          item.style.display = 'block';
+        } else if (category === 'sessions') {
+          if (item.classList.contains('comp-item-session')) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        } else if (category === 'vault') {
+          if (item.classList.contains('comp-item-vault')) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // MOBILE HAMBURGER NAVIGATION CONTROLLER
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+
+    menuToggle.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      if (mobileDrawer.classList.contains('hidden')) {
+        icon.classList.replace('fa-times', 'fa-bars');
+      } else {
+        icon.classList.replace('fa-bars', 'fa-times');
+      }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.add('hidden');
+        menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+      });
+    });
+
+    // PLAYLIST AUDIO SYSTEM DATA LAYER
+    const trackList = [
+      {
+        title: "Outta Pocket (Sessions)",
+        tag: "Outta Pocket (Sessions) (GB&GR) - Session",
+        url: "https://cdn.discordapp.com/attachments/1497096598881042564/1506379499787391047/Outta-Pocket-Sessions-GBGR.mp3?ex=6a0e0cbb&is=6a0cbb3b&hm=4cf6c4bd26552dcee441cd006332033db13a38f3c16608dfbb5614361b3da7a3&", 
+        cover: "https://cdn.discordapp.com/attachments/1496631336516190361/1506385034934747176/Outta_Pocket.png?ex=6a0e11e3&is=6a0cc063&hm=c0b15153220ebf503cc83d27305c76b9291d8f711ab59ee2571fed02a36cf0ea&"
+      },
+      {
+        title: "Juicy (Sessions)",
+        tag: "Juicy (Sessions) (GB&GR) - Session",
+        url: "https://cdn.discordapp.com/attachments/1496631336516190361/1506382364123594812/Juicy-Sessions-1.mp3?ex=6a0e0f66&is=6a0cbde6&hm=f06ea8382bfb071ec12cc3bc3e812b68942727af19d6244dc37d7e63e64384f8&",
+        cover: "https://cdn.discordapp.com/attachments/1496631336516190361/1506385422048034816/Juicy.png?ex=6a0e123f&is=6a0cc0bf&hm=dab577821d60a190d8ad552d4a8f75e69ac94e213e037faf714d2ceea29b777b&"
+      },
+      {
+        title: "Rockets (Sessions)",
+        tag: "Rockets (Ms. Jackson) (Sessions) (GB&GR) - Session",
+        url: "https://cdn.discordapp.com/attachments/1496631336516190361/1506383675489783940/Rockets-Ms-Jackson-Sessions-GBGR.mp3?ex=6a0e109f&is=6a0cbf1f&hm=40baab9dd73b9e9c79e751b736d095afd34615a64ee46b879cb2c9292aaae264&",
+        cover: "https://cdn.discordapp.com/attachments/1496631336516190361/1506386121901342860/Rockets.png?ex=6a0e12e6&is=6a0cc166&hm=6c9740e993cfeec084d01580ec3287ea4fd177bec26e8a6d67b9e8a2876624b2&"
+      }
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+
+    const audio = document.getElementById('main-audio');
+    const playPauseBtn = document.getElementById('btn-play-pause');
+    const playIcon = document.getElementById('play-icon');
+    const prevBtn = document.getElementById('btn-prev');
+    const nextBtn = document.getElementById('btn-next');
+    const trackTitle = document.getElementById('player-track-title');
+    const trackTag = document.getElementById('player-track-tag');
+    const playerCover = document.getElementById('player-cover');
+    const progressBar = document.getElementById('progress-bar');
+    const progressContainer = document.getElementById('progress-container');
+    const currentTimeText = document.getElementById('audio-current-time');
+    const durationTimeText = document.getElementById('audio-duration');
+    const playlistContainer = document.getElementById('playlist-container');
+
+    function initPlaylist() {
+      playlistContainer.innerHTML = '';
+      trackList.forEach((track, index) => {
+        const row = document.createElement('div');
+        row.className = `flex justify-between items-center px-3 py-2 rounded-xl text-xs cursor-pointer font-medium transition-all ${index === currentTrackIndex ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`;
+        row.innerHTML = `
+          <span class="truncate pr-2">#0${index + 1} . ${track.title}</span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 uppercase tracking-wide shrink-0 font-mono">${track.tag.split(' ')[0]}</span>
+        `;
+        row.addEventListener('click', () => {
+          currentTrackIndex = index;
+          loadTrack(currentTrackIndex);
+          playAudio();
+        });
+        playlistContainer.appendChild(row);
+      });
+    }
+
+    function loadTrack(index) {
+      audio.src = trackList[index].url;
+      trackTitle.textContent = trackList[index].title;
+      trackTag.textContent = trackList[index].tag;
+      
+      // Update cover image safely
+      if(trackList[index].cover) {
+        playerCover.src = trackList[index].cover;
+        playerCover.style.display = 'block';
+      } else {
+        playerCover.style.display = 'none';
+      }
+      
+      progressBar.style.width = '0%';
+      currentTimeText.textContent = '0:00';
+      durationTimeText.textContent = '0:00';
+      
+      initPlaylist();
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
+    }
+
+    function playAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        playIcon.className = "fas fa-pause";
+      }).catch(err => console.log("Audio stream status notice: Setup live media attachments."));
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      playIcon.className = "fas fa-play ml-0.5";
+    }
+
+    function formatTime(secs) {
+      if (isNaN(secs)) return '0:00';
+      const minutes = Math.floor(secs / 60);
+      const seconds = Math.floor(secs % 60);
+      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const position = audio.currentTime / audio.duration;
+      progressBar.style.width = `${position * 100}%`;
+      currentTimeText.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationTimeText.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      currentTrackIndex = (currentTrackIndex + 1) % trackList.length;
+      loadTrack(currentTrackIndex);
+      playAudio();
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+      const totalWidth = progressContainer.clientWidth;
+      const clickPosition = e.offsetX;
+      const targetDuration = (clickPosition / totalWidth) * audio.duration;
+      if (!isNaN(targetDuration)) {
+        audio.currentTime = targetDuration;
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentTrackIndex = (currentTrackIndex - 1 + trackList.length) % trackList.length;
+      loadTrack(currentTrackIndex);
+      if (isPlaying) playAudio();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentTrackIndex = (currentTrackIndex + 1) % trackList.length;
+      loadTrack(currentTrackIndex);
+      if (isPlaying) playAudio();
+    });
+
+    playPauseBtn.addEventListener('click', togglePlay);
+
+    // Initial sequence loads
+    loadTrack(currentTrackIndex);
+  </script>
+</body>
+</html>
